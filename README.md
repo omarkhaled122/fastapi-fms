@@ -98,11 +98,7 @@ If you are using a different user or password, update it in `main.py`.
    uvicorn main:app --reload
    ```
 
-2. Open your browser at:
-
-   ```
-   http://127.0.0.1:8000
-   ```
+2. Open the index.html file in a web browser.
 
 3. To view the FastAPI interactive API docs, open:
 
@@ -141,8 +137,6 @@ your_project/
     ```bash
     uvicorn main:app --host 127.0.0.1 --port 8080 --reload
     ```
-
-    Then open: `http://127.0.0.1:8080`
 
 * **Pip Install Issues:**
 
