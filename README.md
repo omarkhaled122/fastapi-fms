@@ -5,7 +5,7 @@ Follow the steps below to set it up and run it on your machine.
 
 ---
 
-## ✅ **1. Requirements**
+## **1. Requirements**
 
 ### **1.1. Install Python**
 
@@ -29,7 +29,7 @@ If `pip` is not recognized, use `python -m pip` instead.
 
 ---
 
-## ✅ **2. Set Up the Database**
+## **2. Set Up the Database**
 
 ### **2.1. Install MySQL**
 
@@ -90,7 +90,7 @@ If you are using a different user or password, update it in `main.py`.
 
 ---
 
-## ✅ **3. Run the Application**
+## **3. Run the Application**
 
 1. Start the FastAPI server:
 
@@ -98,11 +98,7 @@ If you are using a different user or password, update it in `main.py`.
    uvicorn main:app --reload
    ```
 
-2. Open your browser at:
-
-   ```
-   http://127.0.0.1:8000
-   ```
+2. Open the **index.html** file in a web browser.
 
 3. To view the FastAPI interactive API docs, open:
 
@@ -112,7 +108,7 @@ If you are using a different user or password, update it in `main.py`.
 
 ---
 
-## ✅ **4. Project Structure**
+## **4. Project Structure**
 
 ```
 your_project/
@@ -127,7 +123,7 @@ your_project/
 
 ---
 
-## ✅ **5. Troubleshooting**
+## **5. Troubleshooting**
 
 * **MySQL Connection Error:**
 
@@ -142,8 +138,6 @@ your_project/
     uvicorn main:app --host 127.0.0.1 --port 8080 --reload
     ```
 
-    Then open: `http://127.0.0.1:8080`
-
 * **Pip Install Issues:**
 
   * Upgrade pip:
@@ -151,9 +145,3 @@ your_project/
     ```bash
     python -m pip install --upgrade pip
     ```
-
----
-
-### ✅ **Now you’re ready to use the application!**
-
-If you face any issues, check your Python, MySQL, and package versions.
