@@ -848,7 +848,8 @@ def get_driver_performance_percentiles():
             all_trips all_t JOIN driver d 
             ON all_t.DriverID = d.DriverID
         WHERE
-            TripStatus = 'Completed'
+            all_t.TripStatus = 'Completed' AND
+            d.DriverID <> -1
         GROUP BY
             DriverID, driver_name
     )
