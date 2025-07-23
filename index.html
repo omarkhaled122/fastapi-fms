@@ -5,92 +5,165 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fleet Management System</title>
     <link rel="stylesheet" href="styles.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <div class="container">
         <!-- Header -->
         <header>
-            <h1>Fleet Management System</h1>
-            <p class="subtitle">CS727 Relational Database Implementation and Applications Course Project</p>
+            <div class="header-content">
+                <div class="logo-section">
+                    <i class="fas fa-truck-moving logo-icon"></i>
+                    <div>
+                        <h1>Fleet Management System</h1>
+                        <p class="subtitle">CS727 Relational Database Implementation and Applications</p>
+                    </div>
+                </div>
+            </div>
         </header>
 
         <!-- Navigation -->
         <nav>
-            <button class="nav-btn active" onclick="showSection('dashboard')">Dashboard</button>
-            <button class="nav-btn" onclick="showSection('drivers')">Drivers</button>
-            <button class="nav-btn" onclick="showSection('vehicles')">Vehicles</button>
-            <button class="nav-btn" onclick="showSection('trips')">Trips</button>
-            <button class="nav-btn" onclick="showSection('maintenance')">Maintenance</button>
-            <button class="nav-btn" onclick="showSection('fuel')">Fuel Logs</button>
-            <button class="nav-btn" onclick="showSection('violations')">Violations</button>
-            <button class="nav-btn" onclick="showSection('queries')">Advanced Queries</button>
+            <button class="nav-btn active" onclick="showSection('dashboard')">
+                <i class="fas fa-dashboard"></i>
+                <span>Dashboard</span>
+            </button>
+            <button class="nav-btn" onclick="showSection('drivers')">
+                <i class="fas fa-users"></i>
+                <span>Drivers</span>
+            </button>
+            <button class="nav-btn" onclick="showSection('vehicles')">
+                <i class="fas fa-car"></i>
+                <span>Vehicles</span>
+            </button>
+            <button class="nav-btn" onclick="showSection('trips')">
+                <i class="fas fa-route"></i>
+                <span>Trips</span>
+            </button>
+            <button class="nav-btn" onclick="showSection('maintenance')">
+                <i class="fas fa-wrench"></i>
+                <span>Maintenance</span>
+            </button>
+            <button class="nav-btn" onclick="showSection('fuel')">
+                <i class="fas fa-gas-pump"></i>
+                <span>Fuel Logs</span>
+            </button>
+            <button class="nav-btn" onclick="showSection('violations')">
+                <i class="fas fa-exclamation-triangle"></i>
+                <span>Violations</span>
+            </button>
+            <button class="nav-btn" onclick="showSection('queries')">
+                <i class="fas fa-database"></i>
+                <span>Advanced Queries</span>
+            </button>
         </nav>
 
         <!-- Main Content Area -->
         <main id="content">
             <!-- Dashboard Section -->
             <section id="dashboard" class="content-section active">
-                <h2>Dashboard</h2>
+                <div class="section-header">
+                    <h2><i class="fas fa-dashboard"></i> Dashboard Overview</h2>
+                </div>
                 <div class="stats-grid">
                     <div class="stat-card">
-                        <h3>Total Drivers</h3>
-                        <p class="stat-number" id="total-drivers">-</p>
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Total Drivers</h3>
+                            <p class="stat-number" id="total-drivers">-</p>
+                        </div>
                     </div>
-                    <div class="stat-card">
-                        <h3>Available Vehicles</h3>
-                        <p class="stat-number" id="available-vehicles">-</p>
+                    <div class="stat-card available">
+                        <div class="stat-icon">
+                            <i class="fas fa-car"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Available Vehicles</h3>
+                            <p class="stat-number" id="available-vehicles">-</p>
+                        </div>
                     </div>
-                    <div class="stat-card">
-                        <h3>Ongoing Trips</h3>
-                        <p class="stat-number" id="ongoing-trips">-</p>
+                    <div class="stat-card ongoing">
+                        <div class="stat-icon">
+                            <i class="fas fa-route"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Ongoing Trips</h3>
+                            <p class="stat-number" id="ongoing-trips">-</p>
+                        </div>
                     </div>
-                    <div class="stat-card">
-                        <h3>Vehicles in Maintenance</h3>
-                        <p class="stat-number" id="maintenance-count">-</p>
+                    <div class="stat-card maintenance">
+                        <div class="stat-icon">
+                            <i class="fas fa-wrench"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>In Maintenance</h3>
+                            <p class="stat-number" id="maintenance-count">-</p>
+                        </div>
                     </div>
                 </div>
-                <button class="show-query-btn" onclick="showQuery('dashboard-stats')">Show SQL Query</button>
+                <button class="show-query-btn" onclick="showQuery('dashboard-stats')">
+                    <i class="fas fa-code"></i> Show SQL Query
+                </button>
             </section>
 
             <!-- Drivers Section -->
             <section id="drivers" class="content-section">
-                <h2>Drivers Management</h2>
+                <div class="section-header">
+                    <h2><i class="fas fa-users"></i> Drivers Management</h2>
+                </div>
                 <div class="section-controls">
-                    <button class="btn btn-primary" onclick="showAddDriverForm()">Add New Driver</button>
-                    <button class="show-query-btn" onclick="showQuery('select-drivers')">Show SQL Query</button>
+                    <button class="btn btn-primary" onclick="showAddDriverForm()">
+                        <i class="fas fa-plus"></i> Add New Driver
+                    </button>
+                    <button class="show-query-btn" onclick="showQuery('select-drivers')">
+                        <i class="fas fa-code"></i> Show SQL Query
+                    </button>
                 </div>
                 
                 <!-- Add Driver Form (hidden by default) -->
                 <div id="add-driver-form" class="form-container" style="display: none;">
-                    <h3>Add New Driver</h3>
+                    <h3><i class="fas fa-user-plus"></i> Add New Driver</h3>
                     <form onsubmit="addDriver(event)">
-                        <div class="form-group">
-                            <label>ID:</label>
-                            <input type="number" name="driverId" required>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label><i class="fas fa-id-badge"></i> ID:</label>
+                                <input type="number" name="driverId" required>
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-user"></i> First Name:</label>
+                                <input type="text" name="firstName" required>
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-user"></i> Last Name:</label>
+                                <input type="text" name="lastName" required>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label>First Name:</label>
-                            <input type="text" name="firstName" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Last Name:</label>
-                            <input type="text" name="lastName" required>
-                        </div>
-                        <div class="form-group">
-                            <label>License Number:</label>
-                            <input type="text" name="licenseNumber" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Phone:</label>
-                            <input type="number" name="phone" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Email:</label>
-                            <input type="email" name="email">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label><i class="fas fa-id-card"></i> License Number:</label>
+                                <input type="text" name="licenseNumber" required>
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-phone"></i> Phone:</label>
+                                <input type="number" name="phone" required>
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-envelope"></i> Email:</label>
+                                <input type="email" name="email">
+                            </div>
                         </div>
                         <div class="form-actions">
-                            <button type="submit" class="btn btn-success">Add Driver</button>
-                            <button type="button" class="btn btn-secondary" onclick="hideAddDriverForm()">Cancel</button>
+                            <button type="submit" class="btn btn-success">
+                                <i class="fas fa-check"></i> Add Driver
+                            </button>
+                            <button type="button" class="btn btn-secondary" onclick="hideAddDriverForm()">
+                                <i class="fas fa-times"></i> Cancel
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -118,48 +191,62 @@
 
             <!-- Vehicles Section -->
             <section id="vehicles" class="content-section">
-                <h2>Vehicles Management</h2>
+                <div class="section-header">
+                    <h2><i class="fas fa-car"></i> Vehicles Management</h2>
+                </div>
                 <div class="section-controls">
-                    <button class="btn btn-primary" onclick="showAddVehicleForm()">Add New Vehicle</button>
-                    <button class="show-query-btn" onclick="showQuery('select-vehicles')">Show SQL Query</button>
+                    <button class="btn btn-primary" onclick="showAddVehicleForm()">
+                        <i class="fas fa-plus"></i> Add New Vehicle
+                    </button>
+                    <button class="show-query-btn" onclick="showQuery('select-vehicles')">
+                        <i class="fas fa-code"></i> Show SQL Query
+                    </button>
                 </div>
 
                 <!-- Add Vehicle Form (hidden by default) -->
                 <div id="add-vehicle-form" class="form-container" style="display: none;">
-                    <h3>Add New Vehicle</h3>
+                    <h3><i class="fas fa-car-side"></i> Add New Vehicle</h3>
                     <form onsubmit="addVehicle(event)">
-                        <div class="form-group">
-                            <label>Plate Number:</label>
-                            <input type="text" name="plateNumber" required>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label><i class="fas fa-hashtag"></i> Plate Number:</label>
+                                <input type="text" name="plateNumber" required>
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-industry"></i> Make:</label>
+                                <input type="text" name="make" required>
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-car"></i> Model:</label>
+                                <input type="text" name="model" required>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label>Make:</label>
-                            <input type="text" name="make" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Model:</label>
-                            <input type="text" name="model" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Year:</label>
-                            <input type="number" name="year" min="1900" max="2099">
-                        </div>
-                        <div class="form-group">
-                            <label>Status:</label>
-                            <select name="status">
-                                <option value="Available">Available</option>
-                                <option value="In Maintenance">In Maintenance</option>
-                                <option value="In Trip">In Trip</option>
-                                <option value="Unavailable">Unavailable</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Odometer Reading:</label>
-                            <input type="number" name="odometerReading" min="0">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label><i class="fas fa-calendar"></i> Year:</label>
+                                <input type="number" name="year" min="1900" max="2099">
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-info-circle"></i> Status:</label>
+                                <select name="status">
+                                    <option value="Available">Available</option>
+                                    <option value="In Maintenance">In Maintenance</option>
+                                    <option value="In Trip">In Trip</option>
+                                    <option value="Unavailable">Unavailable</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-tachometer-alt"></i> Odometer Reading:</label>
+                                <input type="number" name="odometerReading" min="0">
+                            </div>
                         </div>
                         <div class="form-actions">
-                            <button type="submit" class="btn btn-success">Add Vehicle</button>
-                            <button type="button" class="btn btn-secondary" onclick="hideAddVehicleForm()">Cancel</button>
+                            <button type="submit" class="btn btn-success">
+                                <i class="fas fa-check"></i> Add Vehicle
+                            </button>
+                            <button type="button" class="btn btn-secondary" onclick="hideAddVehicleForm()">
+                                <i class="fas fa-times"></i> Cancel
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -188,47 +275,61 @@
 
             <!-- Trips Section -->
             <section id="trips" class="content-section">
-                <h2>Trips Management</h2>
+                <div class="section-header">
+                    <h2><i class="fas fa-route"></i> Trips Management</h2>
+                </div>
                 <div class="section-controls">
-                    <button class="btn btn-primary" onclick="showAddTripForm()">Start New Trip</button>
-                    <button class="show-query-btn" onclick="showQuery('select-trips')">Show SQL Query</button>
+                    <button class="btn btn-primary" onclick="showAddTripForm()">
+                        <i class="fas fa-plus"></i> Start New Trip
+                    </button>
+                    <button class="show-query-btn" onclick="showQuery('select-trips')">
+                        <i class="fas fa-code"></i> Show SQL Query
+                    </button>
                 </div>
 
                 <!-- Add Trip Form (hidden by default) -->
                 <div id="add-trip-form" class="form-container" style="display: none;">
-                    <h3>Start New Trip</h3>
+                    <h3><i class="fas fa-route"></i> Start New Trip</h3>
                     <form onsubmit="addTrip(event)">
-                        <div class="form-group">
-                            <label>Driver:</label>
-                            <select name="driverId" id="trip-driver-select" required>
-                                <!-- Populated by JavaScript -->
-                            </select>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label><i class="fas fa-user"></i> Driver:</label>
+                                <select name="driverId" id="trip-driver-select" required>
+                                    <!-- Populated by JavaScript -->
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-car"></i> Vehicle:</label>
+                                <select name="vehicleId" id="trip-vehicle-select" required>
+                                    <!-- Populated by JavaScript -->
+                                </select>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label>Vehicle:</label>
-                            <select name="vehicleId" id="trip-vehicle-select" required>
-                                <!-- Populated by JavaScript -->
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Origin:</label>
-                            <select name="originId" id="trip-origin-select" required>
-                                <!-- Populated by JavaScript -->
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Destination:</label>
-                            <select name="destinationId" id="trip-destination-select" required>
-                                <!-- Populated by JavaScript -->
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Distance (km):</label>
-                            <input type="number" name="distance" step="0.1" min="0" required>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label><i class="fas fa-map-marker-alt"></i> Origin:</label>
+                                <select name="originId" id="trip-origin-select" required>
+                                    <!-- Populated by JavaScript -->
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-flag-checkered"></i> Destination:</label>
+                                <select name="destinationId" id="trip-destination-select" required>
+                                    <!-- Populated by JavaScript -->
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-road"></i> Distance (km):</label>
+                                <input type="number" name="distance" step="0.1" min="0" required>
+                            </div>
                         </div>
                         <div class="form-actions">
-                            <button type="submit" class="btn btn-success">Start Trip</button>
-                            <button type="button" class="btn btn-secondary" onclick="hideAddTripForm()">Cancel</button>
+                            <button type="submit" class="btn btn-success">
+                                <i class="fas fa-play"></i> Start Trip
+                            </button>
+                            <button type="button" class="btn btn-secondary" onclick="hideAddTripForm()">
+                                <i class="fas fa-times"></i> Cancel
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -260,48 +361,60 @@
 
             <!-- Maintenance Section -->
             <section id="maintenance" class="content-section">
-                <h2>Maintenance Management</h2>
+                <div class="section-header">
+                    <h2><i class="fas fa-wrench"></i> Maintenance Management</h2>
+                </div>
                 <div class="section-controls">
-                    <button class="btn btn-primary" onclick="showAddMaintenanceForm()">Add Maintenance</button>
-                    <button class="show-query-btn" onclick="showQuery('select-maintenance')">Show SQL Query</button>
+                    <button class="btn btn-primary" onclick="showAddMaintenanceForm()">
+                        <i class="fas fa-plus"></i> Add Maintenance
+                    </button>
+                    <button class="show-query-btn" onclick="showQuery('select-maintenance')">
+                        <i class="fas fa-code"></i> Show SQL Query
+                    </button>
                 </div>
 
                 <!-- Add Maintenance Form (hidden by default) -->
                 <div id="add-maintenance-form" class="form-container" style="display: none;">
-                    <h3>Add Maintenance Record</h3>
+                    <h3><i class="fas fa-tools"></i> Add Maintenance Record</h3>
                     <form onsubmit="addMaintenance(event)">
-                        <div class="form-group">
-                            <label>Vehicle:</label>
-                            <select name="vehicleId" id="maintenance-vehicle-select" required>
-                                <!-- Populated by JavaScript -->
-                            </select>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label><i class="fas fa-car"></i> Vehicle:</label>
+                                <select name="vehicleId" id="maintenance-vehicle-select" required>
+                                    <!-- Populated by JavaScript -->
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-building"></i> Performed By:</label>
+                                <select name="performedBy">
+                                    <option value="Midas">Midas</option>
+                                    <option value="Meineke Car Care Centers">Meineke Car Care Centers</option>
+                                    <option value="Christian Brothers Automotive">Christian Brothers Automotive</option>
+                                    <option value="AAMCO Transmissions">AAMCO Transmissions</option>
+                                    <option value="CARSTAR">CARSTAR</option>
+                                    <option value="Jiffy Lube">Jiffy Lube</option>
+                                    <option value="Firestone Complete Auto Care">Firestone Complete Auto Care</option>
+                                    <option value="Monro, Inc.">Monro, Inc.</option>
+                                    <option value="NTB">NTB</option>
+                                    <option value="Big O Tires">Big O Tires</option>
+                                </select>
+                            </div>
                         </div>
                         <div class="form-group">
-                            <label>Description:</label>
+                            <label><i class="fas fa-comment-alt"></i> Description:</label>
                             <textarea name="description" rows="3"></textarea>
                         </div>
                         <div class="form-group">
-                            <label>Cost:</label>
+                            <label><i class="fas fa-dollar-sign"></i> Cost:</label>
                             <input type="number" name="cost" step="0.01" min="0" required>
                         </div>
-                        <div class="form-group">
-                            <label>Performed By:</label>
-                            <select name="performedBy">
-                                <option value="Midas">Midas</option>
-                                <option value="Meineke Car Care Centers">Meineke Car Care Centers</option>
-                                <option value="Christian Brothers Automotive">Christian Brothers Automotive</option>
-                                <option value="AAMCO Transmissions">AAMCO Transmissions</option>
-                                <option value="CARSTAR">CARSTAR</option>
-                                <option value="Jiffy Lube">Jiffy Lube</option>
-                                <option value="Firestone Complete Auto Care">Firestone Complete Auto Care</option>
-                                <option value="Monro, Inc.">Monro, Inc.</option>
-                                <option value="NTB">NTB</option>
-                                <option value="Big O Tires">Big O Tires</option>
-                            </select>
-                        </div>
                         <div class="form-actions">
-                            <button type="submit" class="btn btn-success">Add Maintenance</button>
-                            <button type="button" class="btn btn-secondary" onclick="hideAddMaintenanceForm()">Cancel</button>
+                            <button type="submit" class="btn btn-success">
+                                <i class="fas fa-check"></i> Add Maintenance
+                            </button>
+                            <button type="button" class="btn btn-secondary" onclick="hideAddMaintenanceForm()">
+                                <i class="fas fa-times"></i> Cancel
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -330,41 +443,55 @@
 
             <!-- Fuel Logs Section -->
             <section id="fuel" class="content-section">
-                <h2>Fuel Logs</h2>
+                <div class="section-header">
+                    <h2><i class="fas fa-gas-pump"></i> Fuel Logs</h2>
+                </div>
                 <div class="section-controls">
-                    <button class="btn btn-primary" onclick="showAddFuelForm()">Add Fuel Log</button>
-                    <button class="show-query-btn" onclick="showQuery('select-fuel')">Show SQL Query</button>
+                    <button class="btn btn-primary" onclick="showAddFuelForm()">
+                        <i class="fas fa-plus"></i> Add Fuel Log
+                    </button>
+                    <button class="show-query-btn" onclick="showQuery('select-fuel')">
+                        <i class="fas fa-code"></i> Show SQL Query
+                    </button>
                 </div>
 
                 <!-- Add Fuel Form (hidden by default) -->
                 <div id="add-fuel-form" class="form-container" style="display: none;">
-                    <h3>Add Fuel Log</h3>
+                    <h3><i class="fas fa-gas-pump"></i> Add Fuel Log</h3>
                     <form onsubmit="addFuelLog(event)">
-                        <div class="form-group">
-                            <label>Vehicle:</label>
-                            <select name="vehicleId" id="fuel-vehicle-select" required>
-                                <!-- Populated by JavaScript -->
-                            </select>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label><i class="fas fa-car"></i> Vehicle:</label>
+                                <select name="vehicleId" id="fuel-vehicle-select" required>
+                                    <!-- Populated by JavaScript -->
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-gas-pump"></i> Fuel Type:</label>
+                                <select name="fuelType">
+                                    <option value="Gasoline">Gasoline</option>
+                                    <option value="Diesel">Diesel</option>
+                                    <option value="Electric">Electric</option>
+                                </select>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label>Fuel Type:</label>
-                            <select name="fuelType">
-                                <option value="Gasoline">Gasoline</option>
-                                <option value="Diesel">Diesel</option>
-                                <option value="Electric">Electric</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Quantity:</label>
-                            <input type="number" name="quantity" step="0.01" min="0">
-                        </div>
-                        <div class="form-group">
-                            <label>Cost:</label>
-                            <input type="number" name="cost" step="0.01" min="0" required>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label><i class="fas fa-tint"></i> Quantity:</label>
+                                <input type="number" name="quantity" step="0.01" min="0">
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-dollar-sign"></i> Cost:</label>
+                                <input type="number" name="cost" step="0.01" min="0" required>
+                            </div>
                         </div>
                         <div class="form-actions">
-                            <button type="submit" class="btn btn-success">Add Fuel Log</button>
-                            <button type="button" class="btn btn-secondary" onclick="hideAddFuelForm()">Cancel</button>
+                            <button type="submit" class="btn btn-success">
+                                <i class="fas fa-check"></i> Add Fuel Log
+                            </button>
+                            <button type="button" class="btn btn-secondary" onclick="hideAddFuelForm()">
+                                <i class="fas fa-times"></i> Cancel
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -392,33 +519,43 @@
 
             <!-- Violations Section -->
             <section id="violations" class="content-section">
-                <h2>Violations</h2>
+                <div class="section-header">
+                    <h2><i class="fas fa-exclamation-triangle"></i> Violations</h2>
+                </div>
                 <div class="section-controls">
-                    <button class="btn btn-primary" onclick="showAddViolationForm()">Add Violation</button>
-                    <button class="show-query-btn" onclick="showQuery('select-violations')">Show SQL Query</button>
+                    <button class="btn btn-primary" onclick="showAddViolationForm()">
+                        <i class="fas fa-plus"></i> Add Violation
+                    </button>
+                    <button class="show-query-btn" onclick="showQuery('select-violations')">
+                        <i class="fas fa-code"></i> Show SQL Query
+                    </button>
                 </div>
 
                 <!-- Add Violation Form (hidden by default) -->
                 <div id="add-violation-form" class="form-container" style="display: none;">
-                    <h3>Add Violation</h3>
+                    <h3><i class="fas fa-exclamation-circle"></i> Add Violation</h3>
                     <form onsubmit="addViolation(event)">
                         <div class="form-group">
-                            <label>Vehicle:</label>
+                            <label><i class="fas fa-car"></i> Vehicle:</label>
                             <select name="vehicleId" id="violation-vehicle-select" required>
                                 <!-- Populated by JavaScript -->
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Description:</label>
+                            <label><i class="fas fa-comment-alt"></i> Description:</label>
                             <textarea name="description" rows="3"></textarea>
                         </div>
                         <div class="form-group">
-                            <label>Penalty Amount:</label>
+                            <label><i class="fas fa-dollar-sign"></i> Penalty Amount:</label>
                             <input type="number" name="penaltyAmount" step="0.01" min="0" required>
                         </div>
                         <div class="form-actions">
-                            <button type="submit" class="btn btn-success">Add Violation</button>
-                            <button type="button" class="btn btn-secondary" onclick="hideAddViolationForm()">Cancel</button>
+                            <button type="submit" class="btn btn-success">
+                                <i class="fas fa-check"></i> Add Violation
+                            </button>
+                            <button type="button" class="btn btn-secondary" onclick="hideAddViolationForm()">
+                                <i class="fas fa-times"></i> Cancel
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -445,101 +582,127 @@
 
             <!-- Advanced Queries Section -->
             <section id="queries" class="content-section">
-                <h2>Advanced Queries</h2>
+                <div class="section-header">
+                    <h2><i class="fas fa-database"></i> Advanced Queries</h2>
+                </div>
                 <div class="query-buttons">
                     <button class="query-btn" onclick="executeQuery('ongoing-trips-view')">
+                        <i class="fas fa-route"></i>
                         <span class="query-title">Ongoing Trips</span>
                         <span class="query-desc">View all currently active trips</span>
                     </button>
                     <button class="query-btn" onclick="executeQuery('available-vehicles-view')">
+                        <i class="fas fa-car"></i>
                         <span class="query-title">Available Vehicles</span>
                         <span class="query-desc">View all available vehicles</span>
                     </button>
                     <button class="query-btn" onclick="executeQuery('violations-details-view')">
+                        <i class="fas fa-exclamation-triangle"></i>
                         <span class="query-title">Violations Details</span>
                         <span class="query-desc">View violations with trip details</span>
                     </button>
                     <button class="query-btn" onclick="executeQuery('vehicle-cost-analysis')">
+                        <i class="fas fa-chart-pie"></i>
                         <span class="query-title">Vehicle Cost Analysis</span>
                         <span class="query-desc">Total operating costs per vehicle</span>
                     </button>
                     <button class="query-btn" onclick="executeQuery('daily-operations')">
+                        <i class="fas fa-calendar-day"></i>
                         <span class="query-title">Daily Operations Summary</span>
                         <span class="query-desc">Today's operational statistics</span>
                     </button>
                     <button class="query-btn" onclick="executeQuery('driver-trips-history')">
+                        <i class="fas fa-history"></i>
                         <span class="query-title">Driver Trips History</span>
                         <span class="query-desc">Get all trips for a specific driver</span>
                     </button>
                     <button class="query-btn" onclick="executeQuery('vehicle-maintenance-history')">
+                        <i class="fas fa-tools"></i>
                         <span class="query-title">Vehicle Maintenance History</span>
                         <span class="query-desc">Get maintenance history for a vehicle</span>
                     </button>
                     <button class="query-btn" onclick="executeQuery('drivers-performance')">
+                        <i class="fas fa-trophy"></i>
                         <span class="query-title">Drivers Performance</span>
-                        <span class="query-desc">Categorize drivers into performance tiers: 'TOP', 'MED', and 'LOW' based on trip completion rate. </span>
+                        <span class="query-desc">Categorize drivers into performance tiers: 'TOP', 'MED', and 'LOW' based on trip completion rate.</span>
                     </button>
                     <button class="query-btn" onclick="executeQuery('top-drivers-manufacturer')">
+                        <i class="fas fa-medal"></i>
                         <span class="query-title">Top Drivers by Manufacturer</span>
-                        <span class="query-desc">List the top three drivers for each vehicle manufacturer. </span>
+                        <span class="query-desc">List the top three drivers for each vehicle manufacturer.</span>
                     </button>
                     <button class="query-btn" onclick="executeQuery('most-driven-vehicles')">
+                        <i class="fas fa-road"></i>
                         <span class="query-title">Most Driven Vehicles</span>
-                        <span class="query-desc">Rank vehicles based on the total distance they have covered. </span>
+                        <span class="query-desc">Rank vehicles based on the total distance they have covered.</span>
                     </button>
                     <button class="query-btn" onclick="executeQuery('maintenance-expenses')">
+                        <i class="fas fa-sitemap"></i>
                         <span class="query-title">Hierarchical Maintenance Expenses</span>
                         <span class="query-desc">Breakdown of maintenance expenses by year, month, and day with subtotals.</span>
                     </button>
                     <button class="query-btn" onclick="executeQuery('driver-performance-percentiles')">
+                        <i class="fas fa-percentage"></i>
                         <span class="query-title">Driver Performance Percentiles</span>
                         <span class="query-desc">Analyze driver performance with completion percentiles and rankings.</span>
                     </button>
                     <button class="query-btn" onclick="executeQuery('loyal-maintenance-providers')">
+                        <i class="fas fa-handshake"></i>
                         <span class="query-title">Loyal Maintenance Providers</span>
                         <span class="query-desc">Identify vehicles consistently serviced by the same maintenance provider.</span>
                     </button>
                     <button class="query-btn" onclick="executeQuery('safe-drivers-unsafe-vehicles')">
+                        <i class="fas fa-shield-alt"></i>
                         <span class="query-title">Safe Drivers of Unsafe Vehicles</span>
                         <span class="query-desc">Find drivers who drove high-violation vehicles without getting violations.</span>
                     </button>
                     <button class="query-btn" onclick="executeQuery('vehicle-distance-milestones')">
+                        <i class="fas fa-flag-checkered"></i>
                         <span class="query-title">Vehicle Distance Milestones</span>
                         <span class="query-desc">Track when vehicles reach 50% of their total distance traveled.</span>
                     </button>
                     <button class="query-btn" onclick="executeQuery('route-efficiency-rankings')">
+                        <i class="fas fa-tachometer-alt"></i>
                         <span class="query-title">Route Efficiency Rankings</span>
                         <span class="query-desc">Rank drivers by their efficiency on specific routes based on speed and time.</span>
                     </button>
                     <button class="query-btn" onclick="executeQuery('vehicle-trip-evolution')">
+                        <i class="fas fa-chart-line"></i>
                         <span class="query-title">Vehicle Trip Evolution</span>
                         <span class="query-desc">Analyze how vehicle trip distances change from first to last trip.</span>
                     </button>
                     <button class="query-btn" onclick="executeQuery('maintenance-cost-analysis')">
+                        <i class="fas fa-coins"></i>
                         <span class="query-title">Maintenance Cost Analysis</span>
                         <span class="query-desc">Breakdown of average maintenance costs by provider and vehicle make.</span>
                     </button>
                     <button class="query-btn" onclick="executeQuery('driver-tenure-analysis')">
+                        <i class="fas fa-user-clock"></i>
                         <span class="query-title">Driver Tenure Analysis</span>
                         <span class="query-desc">Categorize drivers by their years of service and experience level.</span>
                     </button>
                     <button class="query-btn" onclick="executeQuery('driver-violation-rankings')">
+                        <i class="fas fa-sort-amount-down"></i>
                         <span class="query-title">Driver Violation Rankings</span>
                         <span class="query-desc">Rank drivers based on their total number of traffic violations.</span>
                     </button>
                     <button class="query-btn" onclick="executeQuery('fuel-efficiency-analysis')">
+                        <i class="fas fa-leaf"></i>
                         <span class="query-title">Fuel Efficiency Analysis</span>
                         <span class="query-desc">Calculate fuel consumption rates for vehicles between refueling periods.</span>
                     </button>
                     <button class="query-btn" onclick="executeQuery('drivers-never-violated')">
+                        <i class="fas fa-award"></i>
                         <span class="query-title">Drivers Never Violated</span>
                         <span class="query-desc">Drivers who have driven but never got violations (using EXCEPT).</span>
                     </button>
                     <button class="query-btn" onclick="executeQuery('vehicles-no-maintenance')">
+                        <i class="fas fa-exclamation"></i>
                         <span class="query-title">Vehicles Never Maintained</span>
                         <span class="query-desc">Vehicles that have never been maintained (using NOT EXISTS)</span>
                     </button>
                     <button class="query-btn" onclick="executeQuery('drivers-above-average-distance')">
+                        <i class="fas fa-star"></i>
                         <span class="query-title">Drivers above average Distance</span>
                         <span class="query-desc">Drivers who have driven more than ALL average distances per driver</span>
                     </button>
@@ -548,7 +711,9 @@
                 <!-- Query Results -->
                 <div id="query-results" style="display: none;">
                     <h3 id="query-result-title"></h3>
-                    <button class="show-query-btn" onclick="showQuerySQL()">Show SQL Query</button>
+                    <button class="show-query-btn" onclick="showQuerySQL()">
+                        <i class="fas fa-code"></i> Show SQL Query
+                    </button>
                     <div id="query-result-content">
                         <!-- Populated by JavaScript -->
                     </div>
@@ -561,9 +726,11 @@
     <div id="sql-modal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeSQLModal()">&times;</span>
-            <h3>SQL Query</h3>
+            <h3><i class="fas fa-code"></i> SQL Query</h3>
             <pre id="sql-query-display"></pre>
-            <button class="btn btn-secondary" onclick="copySQL()">Copy SQL</button>
+            <button class="btn btn-secondary" onclick="copySQL()">
+                <i class="fas fa-copy"></i> Copy SQL
+            </button>
         </div>
     </div>
 

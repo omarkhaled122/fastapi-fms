@@ -4,6 +4,31 @@ const API_URL = 'http://localhost:8000/api';
 // Current query SQL storage
 let currentQuerySQL = '';
 
+// Add smooth scrolling to the page
+document.addEventListener('DOMContentLoaded', function() {
+    // Smooth scroll for any anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+});
+
+// Add loading animation to buttons
+document.querySelectorAll('.btn').forEach(button => {
+    button.addEventListener('click', function() {
+        if (!this.classList.contains('loading')) {
+            this.classList.add('loading');
+            setTimeout(() => {
+                this.classList.remove('loading');
+            }, 1000);
+        }
+    });
+});
+
 // Show section function
 function showSection(sectionName) {
     // Hide all sections
