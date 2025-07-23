@@ -793,6 +793,15 @@ async function executeQuery(queryType) {
             case 'fuel-efficiency-analysis':
                 endpoint = '/queries/fuel-efficiency-analysis';
                 break;
+            case 'drivers-never-violated':
+                endpoint = '/queries/drivers-never-violated';
+                break;
+            case 'vehicles-no-maintenance':
+                endpoint = '/queries/vehicles-no-maintenance';
+                break;
+            case 'drivers-above-average-distance':
+                endpoint = '/queries/drivers-above-average-distance';
+                break;
         }
         const response = await fetch(`${API_URL}${endpoint}`);
         const result = await response.json();

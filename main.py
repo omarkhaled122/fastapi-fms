@@ -1252,7 +1252,90 @@ def get_fuel_efficiency_analysis():
     finally:
         cursor.close()
         conn.close()
-        
+
+@app.get("/api/queries/drivers-never-violated")
+def get_drivers_never_violated():
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    
+    sql_query = """
+    -- Drivers who have driven but never got violations (using EXCEPT)
+    SELECT DISTINCT d.DriverID, CONCAT(d.FirstName, ' ', d.LastName) as DriverName
+    FROM driver d
+    JOIN trip t ON d.DriverID = t.DriverID
+    WHERE d.DriverID > 0
+    
+    EXCEPT
+    
+    SELECT DISTINCT d.DriverID, CONCAT(d.FirstName, ' ', d.LastName) as DriverName
+    FROM driver d
+    JOIN trip t ON d.DriverID = t.DriverID
+    JOIN violation v ON t.VehicleID = v.VehicleID
+    WHERE v.Date BETWEEN t.StartTime AND t.EndTime
+    AND d.DriverID > 0;
+    """
+    
+    try:
+        cursor.execute(sql_query)
+        data = cursor.fetchall()
+        return {"sql_query": sql_query, "data": data}
+    finally:
+        cursor.close()
+        conn.close()
+
+@app.get("/api/queries/vehicles-no-maintenance")
+def get_vehicles_no_maintenance():
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    
+    sql_query = """
+    -- Vehicles that have never been maintained (using NOT EXISTS)
+    SELECT v.VehicleID, v.PlateNumber, CONCAT(v.Make, ' ', v.Model) as Vehicle
+    FROM vehicle v
+    WHERE v.VehicleID > 0
+    AND NOT EXISTS (
+        SELECT 1 
+        FROM maintenance m 
+        WHERE m.VehicleID = v.VehicleID
+    );
+    """
+    
+    try:
+        cursor.execute(sql_query)
+        data = cursor.fetchall()
+        return {"sql_query": sql_query, "data": data}
+    finally:
+        cursor.close()
+        conn.close()
+
+@app.get("/api/queries/drivers-above-average-distance")
+def get_drivers_above_average():
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    
+    sql_query = """
+    -- Drivers who have driven more than ALL average distances per driver
+    SELECT d.DriverID, CONCAT(d.FirstName, ' ', d.LastName) as DriverName, 
+           SUM(t.Distance) as TotalDistance
+    FROM driver d
+    JOIN trip t ON d.DriverID = t.DriverID
+    WHERE d.DriverID > 0
+    GROUP BY d.DriverID, d.FirstName, d.LastName
+    HAVING SUM(t.Distance) > ALL (
+        SELECT AVG(Distance) 
+        FROM trip 
+        GROUP BY DriverID
+    );
+    """
+    
+    try:
+        cursor.execute(sql_query)
+        data = cursor.fetchall()
+        return {"sql_query": sql_query, "data": data}
+    finally:
+        cursor.close()
+        conn.close()
+
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)

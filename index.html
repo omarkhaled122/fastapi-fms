@@ -531,6 +531,18 @@
                         <span class="query-title">Fuel Efficiency Analysis</span>
                         <span class="query-desc">Calculate fuel consumption rates for vehicles between refueling periods.</span>
                     </button>
+                    <button class="query-btn" onclick="executeQuery('drivers-never-violated')">
+                        <span class="query-title">Drivers Never Violated</span>
+                        <span class="query-desc">Drivers who have driven but never got violations (using EXCEPT).</span>
+                    </button>
+                    <button class="query-btn" onclick="executeQuery('vehicles-no-maintenance')">
+                        <span class="query-title">Vehicles Never Maintained</span>
+                        <span class="query-desc">Vehicles that have never been maintained (using NOT EXISTS)</span>
+                    </button>
+                    <button class="query-btn" onclick="executeQuery('drivers-above-average-distance')">
+                        <span class="query-title">Drivers above average Distance</span>
+                        <span class="query-desc">Drivers who have driven more than ALL average distances per driver</span>
+                    </button>
                 </div>
                 
                 <!-- Query Results -->
