@@ -161,6 +161,82 @@ def delete_driver(driver_id: int):
         cursor.close()
         conn.close()
 
+# Get single driver endpoint
+@app.get("/api/drivers/{driver_id}")
+async def get_driver(driver_id: int):
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        
+        cursor.execute("""
+            SELECT DriverID, FirstName, LastName, LicenseNumber, 
+                   Phone, Email, HireDate
+            FROM driver
+            WHERE DriverID = %s
+        """, (driver_id,))
+        
+        driver = cursor.fetchone()
+        
+        if not driver:
+            raise HTTPException(status_code=404, detail="Driver not found")
+        
+        return {
+            "DriverID": driver[0],
+            "FirstName": driver[1],
+            "LastName": driver[2],
+            "LicenseNumber": driver[3],
+            "Phone": driver[4],
+            "Email": driver[5],
+            "HireDate": driver[6].strftime("%Y-%m-%d") if driver[6] else None
+        }
+        
+    except mysql.connector.Error as e:
+        raise HTTPException(status_code=500, detail=str(e))
+    finally:
+        cursor.close()
+        conn.close()
+
+# Update driver endpoint
+@app.put("/api/drivers/{driver_id}")
+async def update_driver(driver_id: int, driver_data: dict):
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        
+        # First check if driver exists
+        cursor.execute("SELECT DriverID FROM driver WHERE DriverID = %s", (driver_id,))
+        if not cursor.fetchone():
+            raise HTTPException(status_code=404, detail="Driver not found")
+        
+        # Update driver information
+        cursor.execute("""
+            UPDATE driver 
+            SET FirstName = %s, 
+                LastName = %s, 
+                Phone = %s, 
+                Email = %s,
+                HireDate = %s
+            WHERE DriverID = %s
+        """, (
+            driver_data.get("FirstName"),
+            driver_data.get("LastName"),
+            driver_data.get("Phone"),
+            driver_data.get("Email"),
+            driver_data.get("HireDate"),
+            driver_id
+        ))
+        
+        conn.commit()
+        
+        return {"message": "Driver updated successfully", "driver_id": driver_id}
+        
+    except mysql.connector.Error as e:
+        conn.rollback()
+        raise HTTPException(status_code=500, detail=str(e))
+    finally:
+        cursor.close()
+        conn.close()
+
 # Vehicle endpoints
 @app.get("/api/vehicles")
 def get_vehicles():

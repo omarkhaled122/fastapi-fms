@@ -4,6 +4,9 @@ const API_URL = 'http://localhost:8000/api';
 // Current query SQL storage
 let currentQuerySQL = '';
 
+// Track the active query
+let activeQueryButton = null;
+
 // Add smooth scrolling to the page
 document.addEventListener('DOMContentLoaded', function() {
     // Smooth scroll for any anchor links
@@ -31,6 +34,12 @@ document.querySelectorAll('.btn').forEach(button => {
 
 // Show section function
 function showSection(sectionName) {
+    // Clear active query button when switching sections
+    if (activeQueryButton) {
+        activeQueryButton.classList.remove('query-active');
+        activeQueryButton = null;
+    }
+    
     // Hide all sections
     document.querySelectorAll('.content-section').forEach(section => {
         section.classList.remove('active');
@@ -49,6 +58,15 @@ function showSection(sectionName) {
     
     // Load data for the section
     loadSectionData(sectionName);
+}
+
+// Add function to clear query selection
+function clearQuerySelection() {
+    if (activeQueryButton) {
+        activeQueryButton.classList.remove('query-active');
+        activeQueryButton = null;
+    }
+    document.getElementById('query-results').style.display = 'none';
 }
 
 // Load data based on section
@@ -112,7 +130,12 @@ async function loadDrivers() {
                     <td>${driver.Email || '-'}</td>
                     <td>${driver.HireDate}</td>
                     <td>
-                        <button class="btn btn-danger action-btn" onclick="deleteDriver(${driver.DriverID})">Delete</button>
+                        <button class="btn btn-warning action-btn" onclick="showUpdateDriverForm(${driver.DriverID})">
+                            <i class="fas fa-edit"></i> Edit
+                        </button>
+                        <button class="btn btn-danger action-btn" onclick="deleteDriver(${driver.DriverID})">
+                            <i class="fas fa-trash"></i> Delete
+                        </button>
                     </td>
                 </tr>
             `;
@@ -188,6 +211,78 @@ async function deleteDriver(driverId) {
     } catch (error) {
         console.error('Error deleting driver:', error);
         alert('Error deleting driver');
+    }
+}
+
+// Show update driver form with pre-filled data
+async function showUpdateDriverForm(driverId) {
+    try {
+        // Fetch driver details
+        const response = await fetch(`${API_URL}/drivers/${driverId}`);
+        if (!response.ok) throw new Error('Failed to fetch driver details');
+        
+        const driver = await response.json();
+        
+        // Fill the form with current driver data
+        document.getElementById('update-driver-id').value = driver.DriverID;
+        document.getElementById('update-first-name').value = driver.FirstName;
+        document.getElementById('update-last-name').value = driver.LastName;
+        document.getElementById('update-phone').value = driver.Phone;
+        document.getElementById('update-email').value = driver.Email || '';
+        document.getElementById('update-hire-date').value = driver.HireDate;
+        
+        // Show the form
+        document.getElementById('update-driver-form').style.display = 'block';
+        
+        // Scroll to the form
+        document.getElementById('update-driver-form').scrollIntoView({ behavior: 'smooth' });
+        
+    } catch (error) {
+        console.error('Error loading driver details:', error);
+        alert('Error loading driver details');
+    }
+}
+
+// Hide update driver form
+function hideUpdateDriverForm() {
+    document.getElementById('update-driver-form').style.display = 'none';
+    document.querySelector('#update-driver-form form').reset();
+}
+
+// Update driver function
+async function updateDriver(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    
+    const driverId = formData.get('driverId');
+    const updateData = {
+        FirstName: formData.get('firstName'),
+        LastName: formData.get('lastName'),
+        Phone: formData.get('phone'),
+        Email: formData.get('email') || null,
+        HireDate: formData.get('hireDate')
+    };
+    
+    try {
+        const response = await fetch(`${API_URL}/drivers/${driverId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updateData)
+        });
+        
+        if (response.ok) {
+            hideUpdateDriverForm();
+            loadDrivers();
+            alert('Driver updated successfully!');
+        } else {
+            const error = await response.json();
+            alert('Error updating driver: ' + error.detail);
+        }
+    } catch (error) {
+        console.error('Error updating driver:', error);
+        alert('Error updating driver');
     }
 }
 
@@ -744,6 +839,16 @@ async function addViolation(event) {
 // Advanced Queries functions
 async function executeQuery(queryType) {
     try {
+        // Remove previous active state if exists
+        if (activeQueryButton) {
+            activeQueryButton.classList.remove('query-active');
+        }
+        
+        // Find and highlight the clicked query button
+        const clickedButton = event.currentTarget;
+        clickedButton.classList.add('query-active');
+        activeQueryButton = clickedButton;
+        
         let endpoint = '';
         let requiresInput = false;
         let inputValue = null;
@@ -828,6 +933,7 @@ async function executeQuery(queryType) {
                 endpoint = '/queries/drivers-above-average-distance';
                 break;
         }
+        
         const response = await fetch(`${API_URL}${endpoint}`);
         const result = await response.json();
         
@@ -837,9 +943,24 @@ async function executeQuery(queryType) {
         // Display results
         displayQueryResults(queryType, result.data);
         
+        // Smooth scroll to results after a short delay to ensure content is rendered
+        setTimeout(() => {
+            const resultsElement = document.getElementById('query-results');
+            resultsElement.scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'start',
+                inline: 'nearest' 
+            });
+        }, 100);
+        
     } catch (error) {
         console.error('Error executing query:', error);
         alert('Error executing query');
+        // Remove active state on error
+        if (activeQueryButton) {
+            activeQueryButton.classList.remove('query-active');
+            activeQueryButton = null;
+        }
     }
 }
 

@@ -9,6 +9,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Smooth scroll polyfill for browsers that don't support it -->
+    <script>
+        // Only load if smooth scroll behavior is not supported
+        if (!('scrollBehavior' in document.documentElement.style)) {
+            var script = document.createElement('script');
+            script.src = 'https://cdn.jsdelivr.net/npm/smoothscroll-polyfill@0.4.4/dist/smoothscroll.min.js';
+            document.head.appendChild(script);
+        }
+    </script>
 </head>
 <body>
     <div class="container">
@@ -186,6 +195,46 @@
                             <!-- Populated by JavaScript -->
                         </tbody>
                     </table>
+                </div>
+
+                <!-- Update Driver Form (hidden by default) -->
+                <div id="update-driver-form" class="form-container" style="display: none;">
+                    <h3><i class="fas fa-user-edit"></i> Update Driver Information</h3>
+                    <form onsubmit="updateDriver(event)">
+                        <input type="hidden" name="driverId" id="update-driver-id">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label><i class="fas fa-user"></i> First Name:</label>
+                                <input type="text" name="firstName" id="update-first-name" required>
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-user"></i> Last Name:</label>
+                                <input type="text" name="lastName" id="update-last-name" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label><i class="fas fa-phone"></i> Phone:</label>
+                                <input type="tel" name="phone" id="update-phone" required>
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-envelope"></i> Email:</label>
+                                <input type="email" name="email" id="update-email">
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-calendar"></i> Hire Date:</label>
+                                <input type="date" name="hireDate" id="update-hire-date" required>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-success">
+                                <i class="fas fa-save"></i> Save Changes
+                            </button>
+                            <button type="button" class="btn btn-secondary" onclick="hideUpdateDriverForm()">
+                                <i class="fas fa-times"></i> Cancel
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </section>
 
@@ -710,7 +759,12 @@
                 
                 <!-- Query Results -->
                 <div id="query-results" style="display: none;">
-                    <h3 id="query-result-title"></h3>
+                    <div class="query-results-header">
+                        <h3 id="query-result-title"></h3>
+                        <button class="clear-query-btn" onclick="clearQuerySelection()">
+                            <i class="fas fa-times"></i> Clear
+                        </button>
+                    </div>
                     <button class="show-query-btn" onclick="showQuerySQL()">
                         <i class="fas fa-code"></i> Show SQL Query
                     </button>
